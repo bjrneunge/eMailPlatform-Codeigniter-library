@@ -104,8 +104,8 @@ class Emailplatform {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->GetHTTPHeader());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         // disable for security
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, TRUE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
         // execute post
         $result = curl_exec($ch);
@@ -131,8 +131,8 @@ class Emailplatform {
             curl_setopt($ch, CURLOPT_POST, count($fields));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
             // disable for security
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, TRUE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
             // execute post
             $result = curl_exec($ch);
@@ -159,8 +159,8 @@ class Emailplatform {
         curl_setopt($ch, CURLOPT_POST, count($fields));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
         // disable for security
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, TRUE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
         // execute post
         $result = curl_exec($ch);
@@ -944,7 +944,7 @@ class Emailplatform {
      *        	The stat id of the entry you want to retrieve from the database.
      *        
      * @return Array Returns an array of the statistics
-     */
+    **/
     public function GetListSummary($params = array()) {
         $url = $this->URL . '/Stats/GetListSummary';
         return $this->MakeGetRequest($url, $params);
@@ -958,6 +958,26 @@ class Emailplatform {
     public function GetSampleDataForOTM($params = array()) {
         $url = $this->URL . '/Subscribers/GetSampleDataForOTM';
         return $this->MakeGetRequest($url, $params);
+    }
+
+    public function GetSubscribersFromSegment($params = array()) {
+        $url = $this->URL . '/Subscribers/GetSubscribersFromSegment';
+        return $this->MakeGetRequest($url, $params);
+    }
+
+    public function ViewNewsletter($params = array()) {
+        $url = $this->URL . '/Newsletters/ViewNewsletter';
+        return $this->MakeGetRequest($url, $params);
+    }
+
+    public function GetTriggersForSegment($params = array()) {
+        $url = $this->URL . '/Segments/GetTriggersForSegment';
+        return $this->MakeGetRequest($url, $params);
+    }
+
+    public function SendSMS($params = array()) {
+        $url = $this->URL . '/SMS/Send';
+        return $this->MakePostRequest($url, $params);
     }
 
 }
